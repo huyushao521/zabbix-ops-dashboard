@@ -1,0 +1,8 @@
+# 下载物与运行数据，不入库
+dist/
+data/
+logs/
+.grafana.pid
+
+# 数据源配置含 API Token，由 grafana.py 运行时生成
+provisioning/datasources/zabbix.yml

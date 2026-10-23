@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------- 密钥与本地配置
+.env
+webapp/.env
+*.pem
+*.key
+
+# Grafana 运行期自动生成的配置（含 Zabbix API Token，切勿入库）
+grafana/provisioning/
+!grafana/provisioning/**/.gitkeep
+
+# ---------------------------------------------------------------- 运行期产物
+__pycache__/
+*.py[cod]
+*.log
+webapp/server.out.log
+webapp/server.err.log
+grafana/dist/
+grafana/data/
+grafana/logs/
+grafana/.ref/
+grafana/.grafana.pid
+grafana/*.pid
+*.part
+
+# 自动生成的 Grafana 看板（由 webapp/gdash.py 写入）
+grafana/dashboards/*.json
+
+# ---------------------------------------------------------------- 现场数据
+# 设备配置、探测输出、巡检报告等，属于实际环境信息，不入库
+cisco_cfg_*.txt
+cisco_probe_*.txt
+probe_out*.json
+Zabbix巡检报告.md
+
+# ---------------------------------------------------------------- 其他
+ppt/
+*.pptx
+.playwright-cli/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zabbix 运维看板</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">Z</div>
+      <div class="brand-text">
+        <div class="brand-name">Zabbix 运维看板</div>
+        <div class="brand-sub" id="brand-sub">正在连接…</div>
+      </div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="overview">
+        <span class="ico">▤</span>概览
+      </button>
+      <button class="nav-item" data-view="hosts">
+        <span class="ico">▦</span>主机
+      </button>
+      <button class="nav-item" data-view="problems">
+        <span class="ico">▲</span>告警
+        <span class="badge" id="nav-badge" hidden>0</span>
+      </button>
+      <button class="nav-item" data-view="snmp">
+        <span class="ico">⇄</span>SNMP 实测
+      </button>
+    </nav>
+
+    <div class="side-foot">
+      <div class="conn" id="conn">
+        <span class="dot"></span>
+        <span id="conn-text">正在连接…</span>
+      </div>
+      <button class="btn ghost block" id="refresh">重新拉取数据</button>
+      <div class="side-hint">数据实时来自 Zabbix API</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="view-title">概览</h1>
+        <p class="sub" id="view-sub">实时读取 Zabbix 监控数据</p>
+      </div>
+      <div class="topbar-actions">
+        <span class="pill" id="clock">--</span>
+        <button class="btn ghost" id="chat-toggle">对话面板</button>
+      </div>
+    </header>
+    <div class="content" id="content">
+      <div class="loading">正在加载数据…</div>
+    </div>
+  </main>
+
+  <aside class="chat" id="chat">
+    <div class="chat-head">
+      <div>
+        <div class="chat-title">
+          <span class="chat-dot"></span>运维助手
+        </div>
+        <div class="chat-sub">自然语言直查 Zabbix</div>
+      </div>
+      <button class="btn ghost sm" id="chat-clear">清空</button>
+    </div>
+
+    <div class="chat-body" id="chat-body"></div>
+
+    <div class="chat-sugg" id="chat-sugg"></div>
+
+    <form class="chat-form" id="chat-form">
+      <input id="chat-input" placeholder="例如：R1 正常吗？" autocomplete="off">
+      <button type="submit" id="chat-send" title="发送">➤</button>
+    </form>
+  </aside>
+
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
