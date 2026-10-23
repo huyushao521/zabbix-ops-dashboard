@@ -14,7 +14,7 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 HOST_NAME = "R1"
-DEVICE_IP = "192.168.6.129"
+DEVICE_IP = "192.168.1.29"
 SNMP_COMMUNITY = "public"
 SNMP_PORT = "161"
 TEMPLATE_HOST_NAME = "Cisco IOS by SNMP"

@@ -77,7 +77,7 @@ def missing_slots(spec):
 def parse_spec(text, base=None):
     """从一句话里抽取主机名与 IP，补进已有的 spec。
 
-    支持：'SW1 192.168.6.130'、'加台设备 192.168.6.130 叫 SW2'、
+    支持：'SW1 192.168.1.30'、'加台设备 192.168.1.30 叫 SW2'、
           '社区名用 secret'、'用 Cisco IOS by SNMP 模板'、'端口 1161'。
     """
     spec = dict(base or {})

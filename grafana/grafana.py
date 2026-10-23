@@ -54,8 +54,8 @@ PLUGIN_URLS = [
 ]
 
 DEFAULT_PORT = 3000
-ADMIN_USER = "admin"
-ADMIN_PASSWORD = "admin"
+ADMIN_USER = os.environ.get("GRAFANA_ADMIN_USER", "admin")
+ADMIN_PASSWORD = os.environ.get("GRAFANA_ADMIN_PASSWORD", "admin")
 
 UA = {"User-Agent": "zabbix-dashboard-setup/1.0"}
 

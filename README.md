@@ -67,7 +67,7 @@ cp .env.example .env
 ```
 
 ```ini
-ZABBIX_URL=http://192.168.0.10
+ZABBIX_URL=http://192.168.1.10
 ZABBIX_TOKEN=your-api-token
 ```
 
@@ -84,7 +84,7 @@ python webapp/server.py 9000     # 也可以指定端口
 ==========================================================
  Zabbix 运维看板
 ==========================================================
- Zabbix API : http://192.168.0.10
+ Zabbix API : http://192.168.1.10
  API 版本   : 7.0.27
  纳管主机   : 12 台   活跃告警: 3 条
 ----------------------------------------------------------
@@ -106,7 +106,7 @@ Start-Process python -ArgumentList 'webapp/server.py' -WindowStyle Hidden `
 
 | 变量 | 默认值 | 说明 |
 | --- | --- | --- |
-| `ZABBIX_URL` | 无（必填） | Zabbix 站点根地址，如 `http://192.168.0.10` |
+| `ZABBIX_URL` | 无（必填） | Zabbix 站点根地址，如 `http://192.168.1.10` |
 | `ZABBIX_TOKEN` | 无（必填） | Zabbix 7 API Token，走 `Authorization: Bearer` |
 | `GRAFANA_URL` | `http://127.0.0.1:3000` | 生成看板后拼接访问链接用 |
 | `DASH_HOST` | `127.0.0.1` | Web 服务监听地址 |
@@ -136,18 +136,18 @@ Start-Process python -ArgumentList 'webapp/server.py' -WindowStyle Hidden `
 | `接口状态` / `链路` | 该主机接口 UP/DOWN、速率与流量 |
 | `哪些监控项没采到` | 不支持的监控项（unsupported）清单 |
 | `CPU 使用率` / `监控项` | 监控项实时值 |
-| `SNMP 通不通` / `测一下 192.168.0.20` | 现场发 SNMP 报文实测 |
+| `SNMP 通不通` / `测一下 192.168.1.20` | 现场发 SNMP 报文实测 |
 | `有哪些模板` | 模板列表 |
 | `概览` / `整体情况` | 全局统计 |
 | `生成 R1 的看板` | 生成 / 刷新 Grafana 看板并返回链接 |
 | `巡检 R1` / `出个报告` | 主机巡检报告 |
-| `把 SW1 192.168.0.30 加进来` | 进入纳管流程 |
+| `把 SW1 192.168.1.30 加进来` | 进入纳管流程 |
 
 主机识别支持主机名、显示名、接口 IP，按最长匹配；只提到「它 / 这台 / 刚才那台」时沿用会话里最近一次的主机。
 
 ## 主机纳管（唯一的写操作）
 
-对话里发起（例：`添加一台设备 192.168.0.30 叫 SW1，团体名用 public`）后走六步：
+对话里发起（例：`添加一台设备 192.168.1.30 叫 SW1，团体名用 public`）后走六步：
 
 1. **识别**：命中纳管触发词 + 提取已有的槽位（名称、IP、community、端口、模板、主机组）
 2. **追问**：缺什么问什么，一次只问缺的
@@ -189,7 +189,7 @@ python grafana/grafana.py stop
 python grafana/grafana.py restart --port 3000
 ```
 
-默认账号 `admin` / `admin`，仅监听 `127.0.0.1`。`setup` 会优先从镜像下载（支持断点续传），已把安装包放进 `grafana/dist/` 则直接使用本地包。
+默认账号 `admin` / `admin`，仅监听 `127.0.0.1`；可用环境变量 `GRAFANA_ADMIN_USER` / `GRAFANA_ADMIN_PASSWORD` 覆盖。`setup` 会优先从镜像下载（支持断点续传），已把安装包放进 `grafana/dist/` 则直接使用本地包。
 
 看板通过**文件式 provisioning** 装载：`grafana/provisioning/dashboards/default.yml` 指向 `grafana/dashboards/`，Grafana 每 30 秒扫描一次。因此生成看板不需要 Grafana 登录态、不需要 API Token，Grafana 没启动也不影响生成；删掉 JSON 文件即删除看板。
 
